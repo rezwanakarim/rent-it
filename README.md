@@ -1,4 +1,6 @@
 # Rent It
 
-## A home rental website 
+A home rental website 
+
+
 
