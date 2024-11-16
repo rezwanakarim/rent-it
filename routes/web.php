@@ -145,13 +145,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
-// Customer login
+// Customer Register 
 Route::get('/customers/register', [LoginController::class, 'register'])->name('customers.register');
 Route::post('/customers/register', [LoginController::class, 'postRegister'])->name('customers.postRegister');
+// Customer login
 Route::get('/customers/login', [LoginController::class, 'login'])->name('customers.login');
-Route::post('/customers/logout', [LoginController::class, 'logout'])->name('customers.logout');
 Route::post('/customers/authenticate', [LoginController::class, 'postLogin'])->name('customers.authenticate');
-// Customer Register 
+Route::post('/customers/logout', [LoginController::class, 'logout'])->name('customers.logout');
 
 // Don't need auth
 Route::get('/', [HomeController::class, 'home'])->name('frontend.index');

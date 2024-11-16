@@ -30,7 +30,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('frontend.register');
+        return view('backend.customer.create');
     }
 
     /**
@@ -49,10 +49,10 @@ class CustomerController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-            return redirect()->route('customers.create')->withMessage("Registration Successful");
+            return redirect()->route('customers.list')->with('success', "Customer created successfully");
         } catch (QueryException $e) {
 
-            return redirect()->back()->withInput()->withErrors('Something went wrong!');
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
     }
 

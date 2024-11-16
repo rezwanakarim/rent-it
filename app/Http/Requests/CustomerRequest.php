@@ -31,7 +31,7 @@ class CustomerRequest extends FormRequest
             'number' => ['required', 'digits:11'],
             'email' => ['required', Rule::unique('customers', 'email')],
             'password' => ['required', 'confirmed'],
-            'terms' => ['required'], 
+            'terms' => ['nullable'], 
         ];
     }
 }
