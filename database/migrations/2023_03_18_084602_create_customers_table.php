@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('username');
             $table->string('gender');
             $table->string('address');
-            $table->char('number');
+            $table->char('contact_number');
             $table->string('email');
+            $table->char('phone')->nullable()->comment('for login');
             $table->string('password');
             $table->timestamps();
 

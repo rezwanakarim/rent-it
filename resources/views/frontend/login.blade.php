@@ -30,7 +30,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-outline mb-4">
-                                <input type="email" id="form2Example18" name="email" class="form-control form-control-lg" />
+                                <input type="text" id="form2Example18" name="email" class="form-control form-control-lg" />
                                 <label class="form-label" for="form2Example18">Email address</label>
                             </div>
 

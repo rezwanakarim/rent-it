@@ -27,7 +27,7 @@
                     <td class="align-middle">{{$loop->iteration}}</td>
                     <td class="align-middle">{{$slider->title}}</td>
                     <td>
-                        <img src="{{ asset('storage/sliders/'.$slider->image) }}" style="object-fit: cover; height: 150px; width: 200px" alt="Slider image" >
+                        <img src="{{ $slider->image ?: asset('ui/frontend/images/no_photo.jpg') }}" style="object-fit: cover; height: 150px; width: 200px" alt="Slider image" >
                     </td>
                     <td class="align-middle">
                         <a class="btn btn-primary my-1" href="{{ route('sliders.show', ['slider'=>$slider->id])}}">Show</a>

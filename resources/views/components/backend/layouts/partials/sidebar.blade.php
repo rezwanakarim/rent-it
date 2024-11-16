@@ -1,30 +1,33 @@
 <div class="l-navbar" id="nav-bar" style="width: ; object-fit: cover">
     <nav class="nav">
         <div>
-            <a href="{{ route('home')}}" class="nav_logo">
+            <a href="{{ route('home') }}" class="nav_logo">
                 <i class="bx bx-home nav_icon"></i>
                 <span class="nav_logo-name fs-3">Rent !t</span>
             </a>
             <div class="nav_list">
-                <a href="{{route('home')}}" class="nav_link active">
+                <a href="{{ route('home') }}" class="nav_link {{ Route::is('home') ? 'active' : '' }}">
                     <i class="bx bxs-dashboard nav_icon"></i>
                     <span class="nav_name">Dashboard</span>
                 </a>
-                <a href="{{route('customers.list')}}" class="nav_link">
+                <a href="{{ route('customers.list') }}"
+                    class="nav_link {{ Route::is('customers.list') ? 'active' : '' }}">
                     <i class="bx bx-user nav_icon"></i>
                     <span class="nav_name">Customer</span>
                 </a>
 
-                <a href="{{ route('categories.list') }}" class="nav_link">
+                <a href="{{ route('categories.list') }}"
+                    class="nav_link {{ Route::is('categories.list') ? 'active' : '' }}">
                     <i class="bx bx-category nav_icon"></i>
                     <span class="nav_name">Category</span>
                 </a>
 
-                <a href="{{route('sliders.list')}}" class="nav_link">
+                <a href="{{ route('sliders.list') }}" class="nav_link {{ Route::is('sliders.list') ? 'active' : '' }}">
                     <i class="bx bx-slider nav_icon"></i>
                     <span class="nav_name">Slider</span>
                 </a>
-                <a href="{{ route('properties.list') }}" class="nav_link">
+                <a href="{{ route('properties.list') }}"
+                    class="nav_link {{ Route::is('properties.list') ? 'active' : '' }}">
                     <i class="bx bx-building-house nav_icon"></i>
                     <span class="nav_name">Property</span>
                 </a>
@@ -38,25 +41,29 @@
                     <i class='bx bxs-phone'></i>
                     <span class="nav_name">Phone</span>
                 </a> --}}
-                <a href="{{ route('reservations.list') }}" class="nav_link">
+                <a href="{{ route('reservations.list') }}"
+                    class="nav_link {{ Route::is('reservations.list') ? 'active' : '' }}">
                     <i class='bx bxs-book-alt'></i>
                     <span class="nav_name">Reservation</span>
                 </a>
-                <a href="{{ route('roles.list') }}" class="nav_link">
+                <a href="{{ route('roles.list') }}" class="nav_link {{ Route::is('roles.list') ? 'active' : '' }}">
                     <i class='bx bxs-objects-horizontal-left'></i>
                     <span class="nav_name">Role</span>
                 </a>
-                <a href="{{route('users.list')}}" class="nav_link">
+                <a href="{{ route('users.list') }}" class="nav_link {{ Route::is('users.list') ? 'active' : '' }}">
                     <i class="bx bx-user nav_icon"></i>
                     <span class="nav_name">Users</span>
                 </a>
-                
+
             </div>
         </div>
-        <a href="{{route('frontend.index')}}" class="nav_link">
-            <i class="bx bx-log-out nav_icon"></i>
-            <span class="nav_name">SignOut</span>
-        </a>
+        <form action="{{ route('customers.logout') }}" method="post">
+            @csrf
+            <a href="{{ route('frontend.index') }}" class="nav_link" onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="bx bx-log-out nav_icon"></i>
+                <span class="nav_name">SignOut</span>
+            </a>
+        </form>
     </nav>
 </div>
 

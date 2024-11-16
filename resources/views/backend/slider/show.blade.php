@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="{{ asset('storage/sliders/'.$slider->image) }}" class="img-fluid rounded" style="width: 80vw" alt="Slider image">
+                    <img src="{{ $slider->image ?: asset('ui/frontend/images/no_photo.jpg') }}" class="img-fluid rounded" style="width: 80vw" alt="Slider image">
                 </div>
             </div>
         </div>

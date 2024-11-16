@@ -34,11 +34,15 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         try {
-            Slider::create([
+            $slider = Slider::create([
                 'title' => $request->title,
                 'description' => $request->description,
-                'image' => $this->uploadImage($request->file('image'))
             ]);
+            if ($request->hasFile('image')) {
+                $slider->image = $request->file('image');
+                $slider->save();
+            }
+    
             return redirect()->route('sliders.list')->withMessage("Slider Created!");
         } catch (QueryException $e) {
 
@@ -75,11 +79,11 @@ class SliderController extends Controller
                 'description' => $request->description,
             ];
 
-            if ($request->hasFile('image')) {
-                $requestData['image'] = $this->uploadImage(request()->file('image'));
-            }
             $slider->update($requestData);
-            //when storing done! redirect to
+            if ($request->hasFile('image')) {
+                $slider->image = $request->file('image');
+                $slider->save();
+            }
             return redirect()->route('sliders.list')->with('message', "Slider Successfully Updated!");
         } catch (QueryException $e) {
             return redirect()->back()->withInput()->withErrors($e->getMessage());

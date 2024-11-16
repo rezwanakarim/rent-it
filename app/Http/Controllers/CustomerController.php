@@ -45,7 +45,7 @@ class CustomerController extends Controller
                 'username' => $request->username,
                 'gender' => $request->gender,
                 'address' => $request->address,
-                'number' => $request->number,
+                'contact_number' => $request->number,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
@@ -92,7 +92,7 @@ class CustomerController extends Controller
                 'lastName' => $request->lastName,
                 'gender' => $request->gender,
                 'address' => $request->address,
-                'number' => $request->number,
+                'contact_number' => $request->number,
             ]);
             return redirect()->route('customers.list')->with('message', "Customer Successfully Updated!");
         } catch (QueryException $e) {

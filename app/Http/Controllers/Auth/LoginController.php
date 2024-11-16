@@ -19,13 +19,26 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $user = null;
 
-        if (auth()->attempt($credentials)) {
-            // Authentication passed...
+        $request->validate([
+            'email' => ['required'],
+            'password'   => [
+                'required',
+                function ($attribute, $value, $fail) use ($request, &$user) {
+                    // Find the user by phone or email
+                    $user = Customer::where('phone', $request->email)->orWhere('email', $request->email)->first();
+                    // Check if user exists and the password matches
+                    if (!$user || !Hash::check($value, $user->password)) {
+                        $user = null; // Reset user if authentication fails
+                        $fail('Invalid password');
+                    }
+                },
+            ],
+        ]);
+        if ($user) {
+            Auth::guard('web')->login($user);
             return redirect()->route('home');
-        } else {
-            return redirect()->back()->withErrors(['email' => 'The provided credentials do not match our records.']);
         }
     }
 
@@ -43,8 +56,9 @@ class LoginController extends Controller
                 'username' => $request->username,
                 'gender' => $request->gender,
                 'address' => $request->address,
-                'number' => $request->number,
+                'contact_number' => $request->number,
                 'email' => $request->email,
+                'phone' => $request->number,
                 'password' => Hash::make($request->password),
             ]);
             return redirect()->route('customers.login')->withMessage("Registration Successful");

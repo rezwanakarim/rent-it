@@ -32,7 +32,7 @@
                         <div class="col-md-6">
                             <label for="image">Image</label>
                             <input class="form-control shadow" type="file" name="image"> <br><br>
-                            <img src="{{ asset('storage/sliders/' . $slider->image) }}" alt="slider image"
+                            <img src="{{ $slider->image ?: asset('ui/frontend/images/no_photo.jpg') }}" alt="slider image"
                                 class="rounded shadow" width="400px" height="220px">
                             @error('image')
                                 <div class="alert alert-danger">{{ $message }}</div>

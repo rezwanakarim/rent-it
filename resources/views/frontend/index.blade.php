@@ -7,54 +7,56 @@
 
         <div id="wrapper">
             <!---carousal--->
-            <div class="container">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        @php
-                            $count = 0;
-                            $active = 'active';
-                        @endphp
-                        @foreach ($sliders as $slider)
-                            <button type="button" data-bs-target="#carouselExampleDark"
-                                data-bs-slide-to="{{ $count }}" class="{{ $active }} bg-light"
-                                aria-current="true" aria-label="Slide 1">
-                            </button>
+            @if ($sliders->count() > 0)
+                <div class="container">
+                    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
                             @php
-                                $count++;
-                                $active = '';
+                                $count = 0;
+                                $active = 'active';
                             @endphp
-                        @endforeach
-                    </div>
-                    <div class="carousel-inner">
-                        @php
-                            $active = 'active';
-                        @endphp
-                        @foreach ($sliders as $slider)
-                            <div class="carousel-item {{ $active }}" data-bs-interval="5000">
-                                <img src="{{ asset('storage/sliders/' . $slider->image) }}" class="d-block w-100 h-75"
-                                    style="object-fit: cover;" alt="...">
-                                <div class="carousel-caption d-none d-md-block slider-text rounded">
-                                    <h5 class="fs-2 text-white">{{ $slider->title }}</h5>
-                                    <p class="fs-5 text-white">{{ $slider->description }}</p>
+                            @foreach ($sliders as $slider)
+                                <button type="button" data-bs-target="#carouselExampleDark"
+                                    data-bs-slide-to="{{ $count }}" class="{{ $active }} bg-light"
+                                    aria-current="true" aria-label="Slide 1">
+                                </button>
+                                @php
+                                    $count++;
+                                    $active = '';
+                                @endphp
+                            @endforeach
+                        </div>
+                        <div class="carousel-inner">
+                            @php
+                                $active = 'active';
+                            @endphp
+                            @foreach ($sliders as $slider)
+                                <div class="carousel-item {{ $active }}" data-bs-interval="5000">
+                                    <img src="{{ $slider->image ?: asset('ui/frontend/images/no_photo.jpg') }}"
+                                        class="d-block w-100 h-75" style="object-fit: cover;" alt="...">
+                                    <div class="carousel-caption d-none d-md-block slider-text rounded">
+                                        <h5 class="fs-2 text-white">{{ $slider->title }}</h5>
+                                        <p class="fs-5 text-white">{{ $slider->description }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            @php
-                                $active = '';
-                            @endphp
-                        @endforeach
+                                @php
+                                    $active = '';
+                                @endphp
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            </div>
+            @endif
 
 
             <!-- Main Contents  -->
@@ -123,7 +125,7 @@
                                                 alt="property image" class="card-img-top"
                                                 style="width: 100%; height: 35vh; object-fit: cover;"></div>
 
-                                        <div class="favorite"> 
+                                        <div class="favorite">
                                             <i id="favoriteIcon{{ $loop->iteration }}"
                                                 onclick="favorite('favoriteIcon{{ $loop->iteration }}')"
                                                 class="fa-regular fa-heart fs-4"></i>
@@ -161,7 +163,7 @@
                                 if ($limit > 6) {
                                     break;
                                 }
-                                
+
                             @endphp
                         @endforeach
                     </div>
