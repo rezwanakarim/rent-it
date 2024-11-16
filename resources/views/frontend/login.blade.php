@@ -47,7 +47,7 @@
                             </div>
 
                             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-                            <p>Don't have an account? <a href="{{ route('customers.create') }}"
+                            <p>Don't have an account? <a href="{{ route('customers.register') }}"
                                     class="link-primary fs-6">Register here</a></p>
 
                         </form>

@@ -22,15 +22,14 @@ class CustomerRequest extends FormRequest
      */
     public function rules(): array
     {
-        
         return [
             'firstName' => ['required'],
             'lastName' => ['required'],
             'username' => ['required','min:6', 'max:24', Rule::unique('customers', 'username')],
             'gender' => ['required'],
             'address' => ['required'],
-            'number' => ['required'],
-            'email' => ['required'],
+            'number' => ['required', 'digits:11'],
+            'email' => ['required', Rule::unique('customers', 'email')],
             'password' => ['required', 'confirmed'],
             'terms' => ['required'], 
         ];

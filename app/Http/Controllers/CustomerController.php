@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\VarDumper\Caster\CutStub;
 
 class CustomerController extends Controller
@@ -46,7 +47,7 @@ class CustomerController extends Controller
                 'address' => $request->address,
                 'number' => $request->number,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
             ]);
             return redirect()->route('customers.create')->withMessage("Registration Successful");
         } catch (QueryException $e) {
@@ -112,30 +113,6 @@ class CustomerController extends Controller
         }
     }
 
-    public function login()
-    {
-        return view('frontend.login');
-    }
-
-    // authenticate customer
-    // public function authenticate(Request $request)
-    // {
-    //     try {
-    //         $customers = Customer::all();
-    //         foreach ($customers as $customer) {
-    //             if ($customer->email == $request->email && $customer->password == $request->password) {
-    //                 $properties = Property::all();
-    //                 $sliders = Slider::all();
-    //                 $categories = Category::all();
-    //                 return view('frontend.index', ['properties' => $properties, 'sliders' => $sliders, 'categories' => $categories]);
-    //             } else {
-    //                 return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
-    //             }
-    //         }
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->withErrors(['email' => 'Something went wrong']);
-    //     }
-    // }
     public function dashboard(Customer $customer)
     {
 
